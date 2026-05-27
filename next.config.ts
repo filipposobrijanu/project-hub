@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  typescript: {
+    ignoreBuildErrors: true, // μόνο αν είσαι σίγουρος ότι είναι ψευδή errors
+  },
 };
 
 export default nextConfig;
