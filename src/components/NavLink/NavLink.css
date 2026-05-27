@@ -1,0 +1,19 @@
+.hover-nav-link {
+  color: rgba(255, 255, 255, 0.493);
+  transition: all 0.2s ease;
+}
+
+.hover-nav-link-active {
+  color: white;
+  transition: all 0.2s ease;
+}
+.hover-nav-link:hover {
+  color: white;
+  transition: all 0.2s ease;
+  transform: translateY(-2px);
+}
+.hover-nav-link-active:hover {
+  color: rgba(255, 255, 255, 0.493);
+  transition: all 0.2s ease;
+  transform: translateY(-2px);
+}

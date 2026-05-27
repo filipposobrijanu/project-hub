@@ -1,65 +1,70 @@
-import Image from "next/image";
+import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { Shield, Zap, Smile, ExternalLink, Code2, Layers } from "lucide-react";
+import FeatureGrid from "@/components/FeatureGrid/FeatureGrid";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="flex flex-col items-center justify-center text-center min-h-[90vh] px-4 animate-fade-in-up">
+      <small className="inline-flex items-center gap-2 text-sm md:text-base text-white glass-card rounded-2xl mb-3 px-4 py-2 tracking-widest">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="currentColor"
+          className="bi bi-asterisk"
+          viewBox="0 0 16 16"
+        >
+          <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+        </svg>
+        Welcome to the future of team collaboration
+      </small>
+      {/* Slogan */}
+      <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white max-w-4xl leading-tight">
+        Organize your projects with style.
+      </h1>
+
+      {/* Paragraph */}
+      <p className="mt-6 text-lg md:text-xl text-white-50 max-w-2xl">
+        A minimal, glass-like project management platform designed for creative
+        teams who want speed, transparency, and total control.
+      </p>
+
+      {/* CTA Button */}
+      <div className="mt-3 mb-5">
+        {session ? (
+          <Link href="/dashboard">
+            <button className="inline-flex items-center gap-0 btn-glass rounded-5 px-4 py-2 font-bold">
+              <svg
+                style={{ transform: "rotate(-45deg)" }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                className="bi bi-arrow-right-short "
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"
+                />
+              </svg>
+              DASHBOARD
+            </button>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <button className="btn-glass rounded-5 px-4 py-2 text-lg font-bold">
+              GET STARTED
+            </button>
+          </Link>
+        )}
+      </div>
+
+      {/* Feature Grid */}
+      <FeatureGrid />
     </div>
   );
 }
